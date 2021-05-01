@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+<!-- importing post populator -->
+{% import 'macros/recent_posts.html' as macro %}
+
+<div class="recents">
+  <p class="section-header">{{category}}</p>
+  <div class="container">{{macros.populate_recent(recent_posts)}}</div>
+  <div class="load-button-container">
+    <button class="primary-button">Load More</button>
+  </div>
+</div>
