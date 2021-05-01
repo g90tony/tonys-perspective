@@ -1,0 +1,88 @@
+<!-- start of macro -->
+{% macro populateHeadlines(headlines) %}
+
+<div class="headlines-container">
+  <div class="large-tile">
+    <div
+      class="background-image"
+      style="background-image: url({{headline[0]image_url}});"
+    >
+      <div class="overlay">
+        <div class="content-layer">
+          <p class="category-lable">{{headline[0]category}}</p>
+          <div class="text-container">
+            <p class="article-title">{{headline[0]title}}</p>
+            <p class="article-date">{{headline[0]date}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="small-tile-1">
+    <div
+      class="background-image"
+      style="background-image: url({{headline[1]image_url}});"
+    >
+      <div class="overlay">
+        <div class="content-layer">
+          <p class="category-lable">{{headline[1]category}}</p>
+          <div class="text-container">
+            <p class="article-title">{{headline[1]title}}</p>
+            <p class="article-date">{{headline[1]date}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="small-tile-2">
+    <div
+      class="background-image"
+      style="background-image: url({{headline[2]image_url}});"
+    >
+      <div class="overlay">
+        <div class="content-layer">
+          <p class="category-lable">{{headline[2]category}}</p>
+          <div class="text-container">
+            <p class="article-title">{{headline[2]title}}</p>
+            <p class="article-date">{{headline[2]date}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="small-tile-3">
+    <div
+      class="background-image"
+      style="background-image: url({{headline[3]image_url}});"
+    >
+      <div class="overlay">
+        <div class="content-layer">
+          <p class="category-lable">{{headline[3]category}}</p>
+          <div class="text-container">
+            <p class="article-title">{{headline[3]title}}</p>
+            <p class="article-date">{{headline[3]date}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="small-tile-4">
+    <div
+      class="background-image"
+      style="background-image: url({{headline[4]image_url}});"
+    >
+      <div class="overlay">
+        <div class="content-layer">
+          <p class="category-lable">{{headline[4]category}}</p>
+          <div class="text-container">
+            <p class="article-title">{{headline[4]title}}</p>
+            <p class="article-date">{{headline[4]date}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end of macro -->
+{% endmacro %}
