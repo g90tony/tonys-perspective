@@ -48,3 +48,19 @@ class Article(db.Model):
         article = Article.query.filter_by(id = article_id).first()
     
         
+class Category(db.Model):
+    
+    __tablename__ = 'categories'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    
+    def add_category(self):
+        db.session.add(self)
+        db.session.commit()
+        
+    def get_categories():
+        return Category.query.all()
+    
+    def get_category(category_id):
+        return Category.query.filter_by(id = category_id).first()
