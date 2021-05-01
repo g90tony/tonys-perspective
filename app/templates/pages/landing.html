@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<!-- marco import -->
+{% import 'macros/recent_posts.html' as macro %}
+
+<!-- start of content block -->
+{% block content %}
+
+<div class="landing-container">
+  <div class="top-headlines">
+    <p class="section-header">Top Posts</p>
+    <div class="container">{% include 'sections/top_headlines.html' %}</div>
+  </div>
+  <div class="qotd">
+    <p class="section-header">Quote of the day</p>
+    <div class="container">{% include 'sections/quote_otd.html' %}</div>
+  </div>
+  <div class="recents">
+    <p class="section-header">Recent Posts</p>
+    <div class="container">{{macros.populate_recent(recent_posts)}}</div>
+    <div class="load-button-container">
+      <button class="primary-button">Load More</button>
+    </div>
+  </div>
+</div>
+
+<!-- end of content block -->
+{%endblock%}
