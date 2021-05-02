@@ -23,7 +23,7 @@ class Article(db.Model):
         
     @classmethod
     def get_popular(cls):
-        return(Article.query.order_by(views.dec)).limit(5)
+        return Article.query.order_by(views.dec).limit(5)
     
     @classmethod
     def get_recent(cls):
@@ -42,6 +42,10 @@ class Article(db.Model):
     def get_more_category(cls, category_id):
         new_limit = page_number * 10
         return Articles.query.filter_by(category = category_id).limit(new_limit)
+    
+    @classmethod
+    def get_related_articles(cls, category_id):
+        return Article.query.filter_by(category = category_id).order_by(views.dec).limit(5)
     
     @classmethod
     def get_article(cls, article_id):
