@@ -49,3 +49,29 @@ def index():
     return render_template('pages/landing.html', popular = popular_list, recent = recent_list, quote = new_quote, title=title)
         
      
+@main.route('/articles/<category>')
+def article_category(category, methods={'GET, POST'}):
+    
+    current_page = 1
+    
+    article_category = Category.get_category(category)
+    
+    title = f"Tony's Perspective: {article_category.title}"
+    
+    category_articles = Article.get_category(category)
+    
+    if category_articles:
+        articles_list = get_article_category_title(category_articles)
+        
+        
+    form = LoadMoreArticles()
+    
+    if form.validate_on_submit():
+        current_page = current_page + 1
+        more_category_articles = Article.get_more_recent(current_page)
+        
+    articles_list = get_article_category_title(more_category_articles)
+        
+        
+    return render_template('pages/category.html' category_title= article_category.title, category_posts= articles_list, title= title)
+
