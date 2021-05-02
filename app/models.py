@@ -86,3 +86,34 @@ class Comment(db.Model):
         new_limit = 10 * page_number
         
         return Comment.query.filter_by(article_id).limit(new_limit)
+            
+    
+class User(db.Model, UserMixin):
+    
+    __tablename__ = 'users'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String)
+    user_email = db.Column(db.String)
+    password = db.Column(db.String)
+    avatar = db.Column(db.String)
+    comments = db.relationship('Comment', backref='comments', lazy='dynamic')
+    
+    def create_user(self):
+        db.session.add(self)
+        db.session.commit()
+        
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.filter_by(id = user_id).first()
+    
+    @property
+    def password(self, password):
+        raise AttributeError('Password is not a readable attribute')
+    
+    @password.setter
+    def password(self, password):
+        self.password = generate_password_hash(password)
+        
+    def  verify_password(self, password):
+        return check_password_hash(self.password, password)        
