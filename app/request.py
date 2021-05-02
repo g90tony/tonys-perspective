@@ -17,13 +17,13 @@ def get_quote_of_the_day():
         
         quote_json = json.loads(api_response)
         
-        quote_data = quote_json.content.quotes[0]
+        quote_data = quote_json.quotes[0]
         
         quoteOBJ = dict()
         
-        quoteOBJ['quote']  = quote_data.quote
+        quoteOBJ['text']  = quote_data.quote
         quoteOBJ['author'] =quotes_data.author
-        quoteOBJ['image_url'] = quote_data.background
+        quoteOBJ['tag'] = quote_data.background
         
         return quoteOBJ
         
