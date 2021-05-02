@@ -64,3 +64,25 @@ class Category(db.Model):
     
     def get_category(category_id):
         return Category.query.filter_by(id = category_id).first()
+    
+
+class Comment(db.Model):
+    
+    __tablename__ = 'comments'
+    
+    id = db.Column(db.Integer, primary_key= True)
+    user_id = db.Column(db.Integer, db.foreignKey('user.id'))
+    article_id = db.Column(db.Integer, db.foreignKey('articles.id'))
+    content = db.Column(db.String)
+    
+    def add_comment(self):
+        db.session.add(self)
+        db.session.commit()
+        
+    def get_article_comments(article_id):
+        return Comment.query.filter_by(article_id = article_id).limit(10)
+    
+    def get_more_article_comments(article_id, page_number):
+        new_limit = 10 * page_number
+        
+        return Comment.query.filter_by(article_id).limit(new_limit)
