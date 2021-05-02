@@ -27,5 +27,21 @@ def get_quote_of_the_day():
         
         return quoteOBJ
         
+        
+def get_pexels_image(category):
+    url = pexels_url.format(category)
+    headers = dict()
+    
+    headers['authorization'] = pexels_api_key 
+    
+    requestOBJ = urllib.request.Request(url, headers=headers)
+    
+    with urllib.request.urlopen(requestOBJ) as url:
+        api_response = url.read()
+        photo_obj = json.loads(api_response)
+        
+        return photo_obj.photos.src.original
+'
+
     
 
