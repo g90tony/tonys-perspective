@@ -118,3 +118,12 @@ class User(db.Model, UserMixin):
     def  verify_password(self, password):
         return check_password_hash(self.password, password)        
     
+
+
+class Quote:
+    
+    def __init__(self, text, author, tag, image_url):
+        self.text = text,
+        self.author = author,
+        self.tag = tag, 
+        self.image_url = image_url
