@@ -31,7 +31,7 @@ class Article(db.Model):
     
     @classmethod
     def get_category(cls, category_id):
-        return Articles.query.filter_by(category = category_id).limit(20)
+        return Articles.query.filter_by(category = category_id).first()
 
     @classmethod
     def get_more_recent(cls, page_number):
@@ -117,3 +117,4 @@ class User(db.Model, UserMixin):
         
     def  verify_password(self, password):
         return check_password_hash(self.password, password)        
+    
