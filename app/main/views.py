@@ -108,3 +108,20 @@ def view_articles(article_id):
     
     return render_template()
         
+
+@login_required
+@main.route('/articles/view/<int:article_id>/add-comment', methods=['POST'])
+def add_comment(article_id):
+          
+    form = AddComment()
+    
+    if form.validate_on_submit():
+        new_comment = form.comment_input.data
+        
+        user_comment = Comment(user_id = current_user.id, article_id= article_id, content = new_comment)
+        
+        user_comment.add_comment()
+        
+        redirect(url_for('main.view_article', article_id = article_id))
+    
+    
