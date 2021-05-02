@@ -75,3 +75,36 @@ def article_category(category, methods={'GET, POST'}):
         
     return render_template('pages/category.html' category_title= article_category.title, category_posts= articles_list, title= title)
 
+
+@main.route('/articles/view/<int:article_id>')
+def view_articles(article_id):
+    
+    article_data = Article.get_article(article_id)
+    
+    title = f"Tony's Perspective: {article_data.title}"
+    
+    if article_data:
+        category_data = Category.get_category(article_data.category)
+        article_data[category] = category_data.title
+        
+    related_articles = Article.get_related_articles(category_data.id)
+    
+    if related_articles:
+        related_list = get_article_category_title(related_articles)
+        
+    if current_user.is_authenticated:
+        form = AddComment()
+    
+        if form.validate_on_submit():
+            new_comment = form.comment_input.data
+            
+            user_comment = Comment(user_id = current_user.id, article_id= article_id, content = new_comment)
+            
+            user_comment.add_comment()
+            
+    else
+        form = None
+        
+    
+    return render_template()
+        
