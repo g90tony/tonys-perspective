@@ -11,8 +11,10 @@ This is a small application built with Python's Flask framework. It aims to help
 To run this app on your computer,
 
 - #### make sure you have python installed
-- #### clone this repository: $ git clone "https://github.com/g90tony/pitch-perfect.git"
+- #### make sure you have postgres and it's drivers installed
+- #### clone this repository: $ git clone "https://github.com/g90tony/tonys-perspective.git"
 - #### unzip and open the folder in your terminal.
+- #### create account with pexels to generate a API key
 - #### create a start.sh file and add the necessary keys
 
 ## Known Bugs
