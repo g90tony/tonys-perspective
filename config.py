@@ -11,6 +11,9 @@ class Config:
     
     UPLOADED_PHOTOS_DEST = 'app/static/images'
     
+    SIMPLEMDE_JS_IIFE =True
+    SIMPLEMDE_USE_CDN = True
+    
     @staticmethod
     def init_app(app):
         pass
