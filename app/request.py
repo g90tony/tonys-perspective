@@ -41,7 +41,3 @@ def get_pexels_image(category):
         photo_obj = json.loads(api_response)
         
         return photo_obj.photos.src.original
-'
-
-    
-
