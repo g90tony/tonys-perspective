@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+<!-- imported recent posts -->
+{% import 'macros/related_posts.html' as list_related%}
+<!-- import comment list macro -->
+{% import 'macros/user_comments.html' as list_comments %}
+<!-- import wtf form -->
+{% import 'bootstrap/wtf.html' as wtf %}
+
+<!-- start of content block -->
+{% block content %}
+
+<div class="article-view-container">
+  <div class="header-image">
+    <div class="text-container">
+      <p class="article-title">{{article.title}}</p>
+      <p class="article-category">{{article.category}}</p>
+      <p class="article-date">{{article.date}}</p>
+    </div>
+  </div>
+  <div class="article-body-container">
+    <p class="article-body">{{article.content}}</p>
+  </div>
+  <div class="related-articles-container">
+    <p class="comment-form-header">Related Articles</p>
+    {{related_macro.list_related(related_list)}}
+  </div>
+  <div class="article-comments-container">
+    {{comments_macro.list_comments(comments)}}
+    <div class="comment-form-container">
+      <p class="section-header">Comments</p>
+      <form action="{{url_for('main.add_comment')'">
+        <p class="comment-form-header">Drop a comment</p>
+        {{form.csrf_token()}}
+        <!-- comment input -->
+        {{wtf.form_field(form.comment_input, class='form-control form-control-sm
+        custom-input', placeholder ='write here...')}}
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
