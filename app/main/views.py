@@ -17,7 +17,7 @@ def get_article_category_title(articles):
         temp["category"] = article_category.title
         final_list.append(temp)
 
-@main.route('/', methods=['GET, POST'])
+@main.route('/', methods=['GET', 'POST'])
 def index():
     title: "Welcome to Tony's Perspective"
     
