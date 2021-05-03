@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, login_required
 from . import auth
 from .forms import LoginForm, RegistrationForm, AdminLoginForm
 from .. import db
-from ..email import welcome_email
+from ..email import welcome_message
 from ..models import User
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -26,7 +26,7 @@ def login():
     return render_template('auth/signin.html', form = new_login, title = title)
 
 @auth.route('/admin/login', methods=['GET', 'POST'])
-def login():
+def admin_login():
     new_login = LoginForm()
     
     if new_login.validate_on_submit():
@@ -53,7 +53,7 @@ def register():
         user.create_new_user()
  
         
-        welcome_email('Welcome to Pitch Perfect', 'email/welcome_user', user.user_email, user= user)
+        welcome_message('Welcome to Pitch Perfect', 'email/welcome_user', user.user_email, user= user)
         
         return redirect(url_for('auth.login'))
     
