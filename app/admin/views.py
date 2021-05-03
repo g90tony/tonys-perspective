@@ -9,6 +9,24 @@ from .. import db
 from ..models import Article, Category
 from ..request import get_pexels_image
 
+@admin.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    new_login = AdminLoginForm()
+    
+    if new_login.validate_on_submit():
+        user = User.query.filter_by(user_email = 'admin').first()
+        
+        if user is not None and user.verify_password(new_login.password.data):
+            login_user(user, new_login.remember_user.data)
+            
+            return redirect(request.args.get('next') or url_for('admin.index'))
+        
+        flash('Invalid email or password')
+        
+    title = 'Welcome back: Pitch Perfect Sign-in'
+    
+    return render_template('auth/signin.html', form = new_login, title = title)
+
 
 @login_required
 @admin.route('/admin/create-article', methods['GET, POST'])
