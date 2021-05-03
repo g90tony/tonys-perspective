@@ -74,7 +74,7 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     
     id = db.Column(db.Integer, primary_key= True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     article_id = db.Column(db.Integer, db.ForeignKey('articles.id'))
     content = db.Column(db.String)
     
