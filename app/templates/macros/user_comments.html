@@ -1,0 +1,20 @@
+{% macro list_comments(comments) %}
+
+<!-- start of for block -->
+{% for item in comments %}
+<img
+  src="{{url_for('static', filename=item.user_avatar}}"
+  class="mr-3"
+  alt="user avatar"
+/>
+<div class="comment-item-container">
+  <p class="comment-item-user">{{item.username}}</p>
+  <p class="comment-item-date">{{item.date}}</p>
+  <p class="comment-item-body">{{ item.content}}</p>
+</div>
+
+<!-- end of for block -->
+{% endfor %}
+
+<!-- end of macro -->
+{% endmacro %}
