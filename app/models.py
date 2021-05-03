@@ -12,7 +12,7 @@ class Article(db.Model):
     title = db.Column(db.String)
     date = db.Column(db.Time)
     author = db.Column(db.String)
-    category = db.Column(db.Integer, db.foreignKey('categories.id'))
+    category = db.Column(db.Integer, db.ForeignKey('categories.id'))
     content = db.Column(db.String)
     views = db.Column(db.Integer)
     comments = db.relationship('Comment', backref='article_comments', lazy='dynamic')
@@ -75,8 +75,8 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     
     id = db.Column(db.Integer, primary_key= True)
-    user_id = db.Column(db.Integer, db.foreignKey('user.id'))
-    article_id = db.Column(db.Integer, db.foreignKey('articles.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    article_id = db.Column(db.Integer, db.ForeignKey('articles.id'))
     content = db.Column(db.String)
     
     def add_comment(self):
