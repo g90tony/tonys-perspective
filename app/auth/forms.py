@@ -25,3 +25,7 @@ class LoginForm(FlaskForm):
     password = PasswordField(passwordLabel, validators = [Required()])
     remember_user = BooleanField('Remember me')
 
+class AdminLoginForm(FlaskForm):
+    passwordLabel = Markup(" <p class='custom-bold-body mb-0'>Enter your password</p>")
+    password = PasswordField(passwordLabel, validators = [Required()])
+    remember_user = BooleanField('Remember me')
