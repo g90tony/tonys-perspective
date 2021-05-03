@@ -73,7 +73,7 @@ def article_category(category, methods={'GET, POST'}):
     articles_list = get_article_category_title(more_category_articles)
         
         
-    return render_template('pages/category.html' category_title= article_category.title, category_posts= articles_list, title= title)
+    return render_template('pages/category.html', category_title= article_category.title, category_posts= articles_list, title= title)
 
 
 @main.route('/articles/view/<int:article_id>')
@@ -102,7 +102,7 @@ def view_articles(article_id):
             
             user_comment.add_comment()
             
-    else
+    else:
         form = None
         
     
