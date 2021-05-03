@@ -61,3 +61,7 @@ def register():
     
     return render_template('auth/signup.html', form = new_user, title= title)
 
+@auth.route('/logoff')
+def logoff():
+    logout_user()
+    return redirect(url_for('main.landing'))
