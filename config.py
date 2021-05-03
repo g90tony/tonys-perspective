@@ -6,17 +6,23 @@ class Config:
     PEXELS_API_KEY = os.environ.get('PEXELS_API_KEY')
     PEXELS_URL = os.environ.get('PEXELS_URL')
     
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://caleb:admin@localhost/tonys_perspective'
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    
+    UPLOADED_PHOTOS_DEST = 'app/static/images'
+    
     @staticmethod
     def init_app(app):
         pass
     
 class DevConfig(Config):
+    
+    DEBUG = True
+    
+class ProdConfig(Config):
     pass
     
-class Prod(Config):
-    pass
-    
-config_options {
-    'development':DevConfig,
+config_options = {
+    'development': DevConfig,
     'production': ProdConfig
 }
