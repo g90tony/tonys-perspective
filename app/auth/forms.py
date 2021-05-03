@@ -18,3 +18,10 @@ class RegistrationForm(FlaskForm):
     password = PasswordField(passwordLabel, validators = [Required()])
     password2 = PasswordField(password2Label, validators = [Required()])
 
+class LoginForm(FlaskForm):
+    emailLabel = Markup(" <p class='custom-bold-body mb-0'>Enter email address</p>")
+    passwordLabel = Markup(" <p class='custom-bold-body mb-0'>Enter your password</p>")
+    email = StringField(emailLabel, validators = [Required(), Email()])
+    password = PasswordField(passwordLabel, validators = [Required()])
+    remember_user = BooleanField('Remember me')
+
