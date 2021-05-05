@@ -22,15 +22,16 @@ def get_quote_of_the_day():
         
         quoteOBJ = dict()
         for item in quote_data:
-            text  = item.get('text')
-            author = item.get('author')
-            category = item.get('tag')
+            quoteOBJ['text']  = item.get('text')
+            quoteOBJ['author'] = item.get('author')
+            quoteOBJ['category'] = item.get('tag')
             
-            image_url = get_pexels_image(category)
-        
-            quoteOBJ = Quote(text=text, author= author, tag=category, image_url=image_url)
-            
-            print(f'{text} {author} {category}')
+            image_res = get_pexels_image(item.get('tag'))
+           
+           
+            quoteOBJ['image_url'] = image_res 
+            print(image_res)
+    
         
             return quoteOBJ
         

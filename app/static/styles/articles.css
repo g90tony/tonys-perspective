@@ -36,19 +36,20 @@
 
 .article-body-container {
   display: flex;
+  height: 65px;
   margin: 5px 10px;
 }
 
 .article-body {
-  height: 65px;
+  height: 65px !important;
   overflow: hidden;
-  text-overflow: ellipsis;
   font-size: 14px;
 }
 
 .popular-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  grid-template-columns: 0.35fr 0.35fr 0.35fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
     "large small1 small2"
@@ -60,43 +61,43 @@
   position: relative;
   grid-area: large;
   height: 430px;
-  margin: 5px 0;
-  width: 300px;
+  margin: 0 10px !important;
+  width: 97%;
   border-radius: 10px;
 }
 
 .small-tile-1 {
-  margin: 5px 0;
+  margin: 0 10px !important;
   position: relative;
   grid-area: small1;
   height: 210px;
-  width: 300px;
+  width: 97%;
 }
 .small-tile-2 {
-  margin: 5px 0;
+  margin: 0 10px !important;
   position: relative;
   grid-area: small2;
   height: 210px;
-  width: 300px;
+  width: 97%;
 }
 .small-tile-3 {
-  margin: 5px 0;
+  margin: 0 10px !important;
   position: relative;
   grid-area: small3;
   height: 210px;
-  width: 300px;
+  width: 97%;
 }
 .small-tile-4 {
-  margin: 5px 0;
+  margin: 0 10px !important;
   position: relative;
   grid-area: small4;
   height: 210px;
-  width: 300px;
+  width: 97%;
 }
 
 .background-image {
   height: 100%;
-  width: 300px;
+  width: 100%;
   object-fit: cover;
   z-index: -1;
   border-radius: 10px;

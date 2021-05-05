@@ -28,14 +28,15 @@
   border: #0b0a09 solid 2px;
 }
 
-.authentication-link {
+.authentication-item {
   text-decoration: none;
   color: #22bfa5;
   font-size: 12px;
   margin: auto 7px;
   font-weight: 700;
 }
-.authentication-link:hover {
+
+.authentication-item a:hover {
   text-decoration: none;
   color: #fff;
 }

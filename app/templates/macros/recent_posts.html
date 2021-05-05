@@ -5,14 +5,16 @@
 
 <div class="card article-card border-0">
   <img class="card-img-top article-top-image" src="{{item.image_url}}" />
-
-  <div class="header-row">
-    <p class="article-title">{{item.title}}</p>
-    <p class="article-date">{{item.date}}</p>
-  </div>
-  <p class="article-sub-title my-0">{{item.category}}</p>
-  <div class="article-body-container">
-    <p class="article-body">{{item.content}}</p>
+  <div class="card-body">
+    <div class="header-row my-0">
+      <p class="article-title">{{item.title}}</p>
+      <p class="article-date">{{item.date}}</p>
+    </div>
+    <p class="article-sub-title my-0">{{item.category}}</p>
+    <p class="article-body w-100">{{item.content}}</p>
+    <a href="/articles/view/{{item.id}}" class="related-article-link"
+      >Read Article</a
+    >
   </div>
 </div>
 

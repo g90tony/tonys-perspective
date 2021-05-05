@@ -67,8 +67,9 @@
   width: inherit;
 }
 
-.article-body {
+.article-content {
   height: fit-content;
+  font-size: 14px;
   width: 50vw;
 }
 

@@ -99,7 +99,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String)
     user_email = db.Column(db.String)
-    password = db.Column(db.String)
+    user_pass = db.Column(db.String)
     avatar = db.Column(db.String)
     comments = db.relationship('Comment', backref='comments', lazy='dynamic')
     
@@ -120,7 +120,7 @@ class User(db.Model, UserMixin):
         self.password = generate_password_hash(password)
         
     def  verify_password(self, password):
-        return check_password_hash(self.password, password)        
+        return check_password_hash(self.user_pass, password)        
     
 
 

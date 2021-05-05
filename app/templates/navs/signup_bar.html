@@ -1,4 +1,12 @@
+{% if user %}
 <div class="authentication-bar">
-  <a href="/login" class="authentication-link">Sign-in</a
-  ><a href="/register" class="authentication-link">Sign-up</a>
+  <p class="authentication-item">Welcome Back</p>
+  <a href="/logoff" class="authentication-item">Log-out</a>
 </div>
+
+{% else %}
+<div class="authentication-bar">
+  <a href="/login" class="authentication-item">Sign-in</a
+  ><a href="/register" class="authentication-item">Sign-up</a>
+</div>
+{% endif %}

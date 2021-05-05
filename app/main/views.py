@@ -53,7 +53,7 @@ def index():
           recent_list = get_article_category_title(recent_articles)
                    
         
-    return render_template('pages/landing.html', popular = popular_list, recent = recent_list, quote = qotd, form = form, title=title)
+    return render_template('pages/landing.html', popular = popular_list, recent = recent_list, quote = qotd, form = form, title=title, user = current_user.is_authenticated)
         
      
 @main.route('/articles/<category>')
@@ -80,7 +80,7 @@ def article_category(category, methods={'GET, POST'}):
     articles_list = get_article_category_title(more_category_articles)
         
         
-    return render_template('pages/category.html', category_title= article_category.title, category_posts= articles_list, title= title)
+    return render_template('pages/category.html', category_title= article_category.title, category_posts= articles_list, title= title, user = current_user.is_authenticated)
 
 
 @main.route('/articles/view/<int:article_id>')
@@ -119,7 +119,7 @@ def view_articles(article_id):
             
             user_comment.add_comment()        
     
-    return render_template('pages/article.html', article = article_item, related = related_list, form = form, title = title)
+    return render_template('pages/article.html', article = article_item, related = related_list, form = form, title = title, user = current_user.is_authenticated)
         
 
 @login_required

@@ -1,5 +1,5 @@
 from flask import render_template, url_for,flash, redirect
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 from . import auth
 from .forms import LoginForm, RegistrationForm, AdminLoginForm
@@ -21,31 +21,31 @@ def login():
         
         flash('Invalid email or password')
         
-    title = 'Welcome back: Pitch Perfect Sign-in'
+    title = 'Welcome back: Tonys Perspective Sign-in'
     
-    return render_template('auth/signin.html', form = new_login, title = title)
+    return redirect(url_for('main.index', user=current_user))
 
 
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
-    new_user = RegistrationForm()
+    new_registration = RegistrationForm()
     
-    if new_user.validate_on_submit():
+    if new_registration.validate_on_submit():
        
-        user = User(username = f'{new_user.first_name.data} {new_user.last_name.data}' ,user_email = new_user.email.data ,bio = '' ,avatar = 'images/avatar.png' ,password = new_user.password.data) 
-        user.create_new_user()
+        user = User(user_name = f'{new_registration.first_name.data} {new_registration.last_name.data}' ,user_email = new_registration.email.data, avatar = 'images/avatar.png' ,user_pass = new_registration.password.data) 
+        user.create_user()
  
         
-        welcome_message('Welcome to Pitch Perfect', 'email/welcome_user', user.user_email, user= user)
+        welcome_message("Welcome to Tony's Perspective", 'email/welcome_user', user.user_email, user= user)
         
         return redirect(url_for('auth.login'))
     
-    title = 'Create an account: Pitch Perfect Sign-up'     
+    title = "Create an account: Tony's Perspective Sign-up"     
     
-    return render_template('auth/signup.html', form = new_user, title= title)
+    return render_template('auth/signup.html', form = new_registration, title= title)
 
 @auth.route('/logoff')
 def logoff():
     logout_user()
-    return redirect(url_for('main.landing'))
+    return redirect(url_for('main.index'))
