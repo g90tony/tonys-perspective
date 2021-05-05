@@ -3,8 +3,8 @@
     <img src="{{quote.image_url}}" class="quote-otd-image" />
   </div>
   <div class="quote-otd-text-container">
-    <p class="quote-otd-text">{{quote.text}}</p>
-    <p class="quote-otd-author">{{quote.author}}</p>
-    <p class="auote-otd-tag">{{quote.tag}}</p>
+    <p class="quote-otd-text">{{quote.text |join(' - ')}}</p>
+    <p class="quote-otd-author">{{quote.author |join(' - ')}}</p>
+    <p class="quote-otd-tag">{{quote.tag |join(' - ') | upper}}</p>
   </div>
 </div>
