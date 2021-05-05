@@ -6,8 +6,8 @@ class Config:
     WTF_CSRF_SECRET_KEY = os.environ.get('SECRET_KEY')
     
     QUOTES_URL = os.environ.get('QUOTES_URL')
-    PEXELS_API_KEY = os.environ.get('PEXELS_API_KEY')
-    PEXELS_URL = os.environ.get('PEXELS_URL')
+    PIXELBAY_API_URL = os.environ.get('PIXELBAY_API_URL')
+    PIXELBAY_API_KEY = os.environ.get('PIXELBAY_API_KEY')
     
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://caleb:admin@localhost/tonys_perspective'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
