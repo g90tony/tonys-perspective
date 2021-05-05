@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 <!-- imported recent posts -->
-{% import 'macros/related_posts.html' as list_related%}
+{% import 'macros/related_posts.html' as related_macro%}
 <!-- import comment list macro -->
-{% import 'macros/user_comments.html' as list_comments %}
+{% import 'macros/user_comments.html' as comments_macro %}
 <!-- import wtf form -->
 {% import 'bootstrap/wtf.html' as wtf %}
 
@@ -10,30 +10,39 @@
 {% block content %}
 
 <div class="article-view-container">
-  <div class="header-image">
-    <div class="text-container">
-      <p class="article-title">{{article.title}}</p>
-      <p class="article-category">{{article.category}}</p>
-      <p class="article-date">{{article.date}}</p>
+  <div class="header-container">
+    <img src="{{article.image_url}}" class="header-image" alt="" />
+    <div class="header-overlay">
+      <div class="header-text-container">
+        <p class="section-header">{{article.title}}</p>
+        <p class="article-category">{{article.category}}</p>
+        <p class="article-date">{{article.date}}</p>
+      </div>
     </div>
   </div>
   <div class="article-body-container">
     <p class="article-body">{{article.content}}</p>
   </div>
   <div class="related-articles-container">
-    <p class="comment-form-header">Related Articles</p>
-    {{related_macro.list_related(related_list)}}
+    <p class="section-header">Related Articles</p>
+    {{related_macro.list_related(related)}}
   </div>
   <div class="article-comments-container">
+    <p class="section-header">Comments</p>
     {{comments_macro.list_comments(comments)}}
     <div class="comment-form-container">
-      <p class="section-header">Comments</p>
-      <form action="{{url_for('main.add_comment')'">
+      <form
+        action="{{url_for('main.add_comment', article_id=article.id)}}"
+        method="POST"
+      >
         <p class="comment-form-header">Drop a comment</p>
         {{form.csrf_token()}}
         <!-- comment input -->
         {{wtf.form_field(form.comment_input, class='form-control form-control-sm
-        custom-input', placeholder ='write here...')}}
+        custom-input', placeholder ='write here...', rows='5')}}
+        <div class="comment-form-button-row">
+          <button type="submit" class="custom-button">Post</button>
+        </div>
       </form>
     </div>
   </div>
