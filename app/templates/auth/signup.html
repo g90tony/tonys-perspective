@@ -3,10 +3,10 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 <!-- start of content block -->
 {% block content %}
-<div class="container sign-container">
-  <div class="card shadow signin-form-card">
-    <div class="card-body mx-4">
-      <p class="custom-bold-title text-center">Create new account</p>
+<div class="container d-flex justify-content-center mt-5 w-100 h-75v">
+  <div class="card my-auto border-0">
+    <div class="card-body text-center mx-4">
+      <p class="section-header text-center">Create new account</p>
       <form method="POST" class="sign-form">
         {{form.csrf_token()}}
         <div class="sign-form-row">
@@ -34,10 +34,10 @@
         custom-input', placeholder ='johndoe@example.com')}}
 
         <div class="sign-form-button">
-          <button type="submit" class="register-button">Create account</button>
+          <button type="submit" class="custom-button">Create account</button>
         </div>
       </form>
-      <p class="custom-light-body text-center mt-2">
+      <p class="related-article-body text-center mt-2">
         If you already have an account
         <span><a href="/login" class="intext-link">click here</a></span> to sign
         in

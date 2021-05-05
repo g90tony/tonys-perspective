@@ -3,25 +3,27 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 <!-- start of content block -->
 {% block content %}
-<div class="container sign-container">
-  <div class="card shadow signin-form-card">
-    <div class="card-body mx-4">
-      <p class="custom-bold-title text-center">Login into your account</p>
+<div
+  class="container d-flex align-content-center justify-content-center mt-5 w-100 h-75v"
+>
+  <div class="card my-auto border-0">
+    <div class="card-body text-center mx-4">
+      <p class="section-header text-center">Login into your account</p>
       <form method="POST" class="sign-form">
         {{form.csrf_token()}}
         <!-- email input -->
         {{wtf.form_field(form.email, class='form-control form-control-sm
-        custom-input', placeholder ='johndoe@example.com')}}
+        custom-input text-center', placeholder ='johndoe@example.com')}}
 
         <!-- password input  -->
         {{wtf.form_field(form.password, class='form-control form-control-sm
-        custom-input', placeholder ='At least 8 character')}}
+        custom-input text-center', placeholder ='At least 8 character')}}
 
-        <div class="sign-form-button">
-          <button type="submit" class="login-button">Login</button>
+        <div class="d-flex flex-row justify-content-center">
+          <button type="submit" class="custom-button">Login</button>
         </div>
       </form>
-      <p class="custom-light-body text-center mt-2">
+      <p class="related-article-body text-center mt-2">
         If you don't have an account
         <span><a href="/register" class="intext-link">click here</a></span> to
         sign up
