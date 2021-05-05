@@ -1,12 +1,13 @@
 import urllib.request, json
-from .models import Article
+from .models import Article, Quote
 
 def configure_request(app):
-    global quotes_url, pexels_api_key, pexels_url
+    global quotes_url, pixelbay_api_key, pixelbay_api_url
     
     quotes_url = app.config['QUOTES_URL']
-    pexels_api_key = app.config['PEXELS_API_KEY']
-    pexels_url = app.config['PEXELS_URL']
+    pixelbay_api_key = app.config['PIXELBAY_API_KEY']
+    pixelbay_api_url = app.config['PIXELBAY_API_URL']
+    
 
 
 def get_quote_of_the_day():
@@ -17,27 +18,28 @@ def get_quote_of_the_day():
         
         quote_json = json.loads(api_response)
         
-        quote_data = quote_json.quotes[0]
+        quote_data = quote_json['quotes']
         
         quoteOBJ = dict()
+        for item in quote_data:
+            text  = item.get('text')
+            author = item.get('author')
+            category = item.get('tag')
+            
+            image_url = get_pexels_image(category)
         
-        quoteOBJ['text']  = quote_data.quote
-        quoteOBJ['author'] =quotes_data.author
-        quoteOBJ['tag'] = quote_data.background
+            quoteOBJ = Quote(text=text, author= author, tag=category, image_url=image_url)
+            
+            print(f'{text} {author} {category}')
         
-        return quoteOBJ
+            return quoteOBJ
         
         
 def get_pexels_image(category):
-    url = pexels_url.format(category)
-    headers = dict()
+    request_url = pixelbay_api_url.format(pixelbay_api_key, category)
     
-    headers['authorization'] = pexels_api_key 
-    
-    requestOBJ = urllib.request.Request(url, headers=headers)
-    
-    with urllib.request.urlopen(requestOBJ) as url:
+    with urllib.request.urlopen(request_url) as url:
         api_response = url.read()
         photo_obj = json.loads(api_response)
         
-        return photo_obj.photos.src.original
+        return photo_obj['hits'][0]['webformatURL']
