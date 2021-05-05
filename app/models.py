@@ -1,8 +1,9 @@
 from flask_login import UserMixin
+from werkzeug import generate_password_hash, check_password_hash
+from sqlalchemy import text
 
 from . import db
 from . import login_manager
-from werkzeug import generate_password_hash, check_password_hash
 
 class Article(db.Model):
     __tablename__ = 'articles'
@@ -22,7 +23,7 @@ class Article(db.Model):
         
     @classmethod
     def get_popular(cls):
-        return Article.query.order_by(views.dec).limit(5)
+        return Article.query.limit(5)
     
     @classmethod
     def get_recent(cls):
@@ -30,7 +31,7 @@ class Article(db.Model):
     
     @classmethod
     def get_category(cls, category_id):
-        return Articles.query.filter_by(category = category_id).first()
+        return Articles.query.filter_by(category = category_id).limit(5)
 
     @classmethod
     def get_more_recent(cls, page_number):
