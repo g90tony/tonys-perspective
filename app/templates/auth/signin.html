@@ -9,7 +9,7 @@
   <div class="card my-auto border-0">
     <div class="card-body text-center mx-4">
       <p class="section-header text-center">Login into your account</p>
-      <form method="POST" class="sign-form">
+      <form method="POST">
         {{form.csrf_token()}}
         <!-- email input -->
         {{wtf.form_field(form.email, class='form-control form-control-sm
@@ -18,6 +18,12 @@
         <!-- password input  -->
         {{wtf.form_field(form.password, class='form-control form-control-sm
         custom-input text-center', placeholder ='At least 8 character')}}
+        <!-- error -->
+        {%if message %}
+        <p class="text-danger">{{message}}</p>
+        {% endif %} {{wtf.form_field(form.remember_user, class='form-control
+        form-control-sm custom-input text-center', placeholder ='At least 8
+        character')}}
 
         <div class="d-flex flex-row justify-content-center">
           <button type="submit" class="custom-button">Login</button>

@@ -84,12 +84,37 @@ class Comment(db.Model):
         db.session.commit()
         
     def get_article_comments(article_id):
-        return Comment.query.filter_by(article_id = article_id).limit(10)
+        found_comments = Comment.query.filter_by(article_id = article_id).limit(10)
+        comment_list = list()
+        for comment in found_comments:
+            comment_item = {}
+            commentor = User.query.filter_by(id = comment.user_id ).first()
+            
+            if commentor:
+                comment_item['username'] = commentor.user_name
+                comment_item['user_avatar'] = commentor.avatar
+                comment_item['comment'] = comment.content
+                
+                comment_list.append(comment_item)
+            else:
+                print('Problem finding user')
+        return comment_list
     
     def get_more_article_comments(article_id, page_number):
         new_limit = 10 * page_number
-        
-        return Comment.query.filter_by(article_id).limit(new_limit)
+        found_comments = Comment.query.filter_by(article_id = article_id).limit(new_limit)
+        comment_list = list()
+        for comment in found_comments:
+            comment_item = dict()
+            commentor = User.query.filter_by(id = comment.user_id ).first()
+            
+            comment_item['username'] = commentor.user_name
+            comment_item['user_avatar'] = commentor.avatar
+            comment_item['comment'] = comment.content
+            
+            comment_list.append(comment_item)
+            
+        return comment_list
             
     
 class User(db.Model, UserMixin):
@@ -117,7 +142,7 @@ class User(db.Model, UserMixin):
     
     @password.setter
     def password(self, password):
-        self.password = generate_password_hash(password)
+        self.user_pass = generate_password_hash(password)
         
     def  verify_password(self, password):
         return check_password_hash(self.user_pass, password)        

@@ -2,15 +2,16 @@
 
 <!-- start of for block -->
 {% for item in comments %}
-<img
-  src="{{url_for('static', filename=item.user_avatar)}}"
-  class="mr-3"
-  alt="user avatar"
-/>
-<div class="comment-item-container">
-  <p class="comment-item-user">{{item.username}}</p>
-  <p class="comment-item-date">{{item.date}}</p>
-  <p class="comment-item-body">{{ item.content}}</p>
+<div class="comment-container">
+  <img
+    src="{{url_for('static',filename=item.user_avatar)}}"
+    class="mr-3 comment-item-avatar rounded-circle"
+    alt="user avatar"
+  />
+  <div class="comment-item-container">
+    <p class="comment-item-user">{{item.username}}</p>
+    <p class="comment-item-body">{{ item.comment}}</p>
+  </div>
 </div>
 
 <!-- end of for block -->

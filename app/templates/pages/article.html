@@ -29,8 +29,17 @@
   </div>
   <div class="article-comments-container">
     <p class="section-header">Comments</p>
-    {{comments_macro.list_comments(comments)}}
+    {% if comments%} {{comments_macro.list_comments(comments)}} {% else %}
+    <p class="text-center article-body">
+      There are no comments. <br />
+      <span class="article-date">
+        <a href="/login" class="authentication-item">Log in</a>to be the first
+      </span>
+    </p>
+    {% endif %}
     <div class="comment-form-container">
+      {% if user %}
+
       <form
         action="{{url_for('main.add_comment', article_id=article.id)}}"
         method="POST"
@@ -44,6 +53,8 @@
           <button type="submit" class="custom-button">Post</button>
         </div>
       </form>
+
+      {% endif %}
     </div>
   </div>
 </div>

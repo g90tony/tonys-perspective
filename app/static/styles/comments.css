@@ -1,0 +1,25 @@
+.comment-container {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 20px 40px;
+}
+
+.comment-item-avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+.comment-item-container {
+  display: flex;
+  flex-flow: column;
+}
+.comment-item-user {
+  font-weight: 700;
+  font-size: 16px;
+  color: #22bfa5;
+  margin-bottom: 0;
+}
+.comment-item-body {
+  margin: 0 20px;
+  font-size: 14px;
+}

@@ -90,6 +90,8 @@ def view_articles(article_id):
     
     related_articles = Article.query.filter_by(category = article_data.category).limit(5)
     
+    article_comments = Comment.get_article_comments(article_id)
+    
     if related_articles:
         related_list = get_article_category_title(related_articles)
     
@@ -112,14 +114,14 @@ def view_articles(article_id):
     form = AddComment()
     if current_user.is_authenticated:
         
-        if form.validte_on_submit():
+        if form.validate_on_submit():
             new_comment = form.comment_input.data
             
             user_comment = Comment(user_id = current_user.id, article_id = article_id, content = new_comment)
             
             user_comment.add_comment()        
     
-    return render_template('pages/article.html', article = article_item, related = related_list, form = form, title = title, user = current_user.is_authenticated)
+    return render_template('pages/article.html', article = article_item, related = related_list, form = form, title = title, user = current_user.is_authenticated, comments = article_comments)
         
 
 @login_required

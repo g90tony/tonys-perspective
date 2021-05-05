@@ -1,4 +1,4 @@
-from flask import render_template, url_for,flash, redirect
+from flask import render_template, url_for,flash, redirect, request
 from flask_login import login_user, logout_user, login_required, current_user
 
 from . import auth
@@ -11,19 +11,22 @@ from ..models import User
 def login():
     new_login = LoginForm()
     
+    message=''
+    
     if new_login.validate_on_submit():
         user = User.query.filter_by(user_email = new_login.email.data).first()
         
         if user is not None and user.verify_password(new_login.password.data):
-            login_user(user, new_login.remember_user.data)
+            login_user(user)
             
-            return redirect(request.args.get('next') or url_for('main.index'))
+            message ='Login in successful'
+            return redirect(request.args.get('next') or url_for('main.index', user = current_user))
         
-        flash('Invalid email or password')
+        message = 'Invalid email or password'
         
     title = 'Welcome back: Tonys Perspective Sign-in'
     
-    return redirect(url_for('main.index', user=current_user))
+    return render_template('auth/signin.html', form = new_login, title = title, message = message)
 
 
 
@@ -33,7 +36,7 @@ def register():
     
     if new_registration.validate_on_submit():
        
-        user = User(user_name = f'{new_registration.first_name.data} {new_registration.last_name.data}' ,user_email = new_registration.email.data, avatar = 'images/avatar.png' ,user_pass = new_registration.password.data) 
+        user = User(user_name = f'{new_registration.first_name.data} {new_registration.last_name.data}' ,user_email = new_registration.email.data, avatar = 'images/avatar.png' ,password = new_registration.password.data) 
         user.create_user()
  
         
