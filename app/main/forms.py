@@ -7,6 +7,6 @@ class LoadMoreArticles(FlaskForm):
     
     
 class AddComment(FlaskForm):
-    comment_input = TextAreaField(validators=[Required()])
+    comment_input = TextAreaField('', validators=[Required()])
     submit = SubmitField('Post')
     
