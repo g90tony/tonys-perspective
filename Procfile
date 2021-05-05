@@ -1,1 +1,1 @@
-web: gunicon manage:app
+web: gunicorn manage:app
