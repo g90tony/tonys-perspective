@@ -3,23 +3,16 @@
 <!-- start of for block -->
 {% for item in recent_posts %}
 
-<div class="card article-card">
-  <img
-    class="card-img-top article-top-image"
-    src="{{url_for('static', filename=item.image_url)}}"
-  />
-  <div class="card-body">
-    <div class="header-row">
-      <p class="article-title">{{item.title}}</p>
-      <p class="article-date">{{item.date}}</p>
-    </div>
-    <div class="detail-row">
-      <p class="article-sub-title">{{item.author}}</p>
-      <p class="article-sub-title">{{item.category}}</p>
-    </div>
-    <div class="article-body-container">
-      <p class="article-body">{{item.content}}</p>
-    </div>
+<div class="card article-card border-0">
+  <img class="card-img-top article-top-image" src="{{item.image_url}}" />
+
+  <div class="header-row">
+    <p class="article-title">{{item.title}}</p>
+    <p class="article-date">{{item.date}}</p>
+  </div>
+  <p class="article-sub-title my-0">{{item.category}}</p>
+  <div class="article-body-container">
+    <p class="article-body">{{item.content}}</p>
   </div>
 </div>
 
