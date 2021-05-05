@@ -3,7 +3,6 @@ import os
 class Config:
     
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    WTF_CSRF_SECRET_KEY = os.environ.get('SECRET_KEY')
     
     QUOTES_URL = os.environ.get('QUOTES_URL')
     PIXELBAY_API_URL = os.environ.get('PIXELBAY_API_URL')
