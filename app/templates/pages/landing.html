@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 <!-- marco import -->
 {% import 'macros/recent_posts.html' as macro %}
+<!-- import wtf form -->
+{% import 'bootstrap/wtf.html' as wtf %}
 
 <!-- start of content block -->
 {% block content %}
@@ -16,9 +18,15 @@
   </div>
   <div class="recents">
     <p class="section-header">Recent Posts</p>
-    <div class="container">{{macros.populate_recent(recent_posts)}}</div>
+    <div class="container">
+      <div class="row">{{macro.populate_recent(recent)}}</div>
+    </div>
     <div class="load-button-container">
-      <button class="primary-button">Load More</button>
+      <form method="POST">
+        {{form.csrf_token()}}
+        <!-- load more submit button -->
+        {{wtf.form_field(form.loadMore, class='custom-button')}}
+      </form>
     </div>
   </div>
 </div>
