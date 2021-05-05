@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
 
 from . import main
@@ -9,44 +9,51 @@ from ..request import get_quote_of_the_day, get_pexels_image
 
 def get_article_category_title(articles):
     final_list = list()
+    
     for article in articles:
-        temp = article
-        
-        article_category = Category.get_category(temp.category)
-        
-        temp["category"] = article_category.title
+        temp = dict()
+        category = Category.query.filter_by(id = article.category).first()
+        temp['id'] = article.id 
+        temp['image_url'] = article.image_url
+        temp['title'] = article.title
+        temp['date'] = article.date
+        temp['content'] = article.content
+        temp['views'] = article.views
+        temp['comments'] = article.comments
+        temp['category'] = category.title     
+
         final_list.append(temp)
+        
+    return final_list
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    title: "Welcome to Tony's Perspective"
+    title = "Welcome to Tony's Perspective"
     
     popular_articles = Article.get_popular()
     recent_articles = Article.get_recent()
-    
+        
     qotd = get_quote_of_the_day()
-    quote_img = get_pexels_image(qotd.tag)
-    
-    new_quote = Quote(text= qotd.text, author= qotd.author, tag= qotd.tag, image_url= quote_img)
     
     form = LoadMoreArticles()
     current_page = 1
     
     if form.validate_on_submit():
-        current_page = current_page + 1
+        current_page == current_page + 1
         more_recent_articles = Article.get_more_recent(current_page)
+  
+        if more_recent_articles:
+            recent_list = get_article_category_title(more_recent_articles)
             
-    if popular_list:
-       popular_list = get_article_category_title(popular_articles)
+            
+    if popular_articles:
+           popular_list = get_article_category_title(popular_articles)
 
-    if recent_posts:
-      recent_list = get_article_category_title(recent_articles)
-            
-    if more_recent_articles:
-        recent_list = get_article_category_title(more_recent_articles)
+    if recent_articles:
+          recent_list = get_article_category_title(recent_articles)
+                   
         
-        
-    return render_template('pages/landing.html', popular = popular_list, recent = recent_list, quote = new_quote, title=title)
+    return render_template('pages/landing.html', popular = popular_list, recent = recent_list, quote = qotd, form = form, title=title)
         
      
 @main.route('/articles/<category>')
@@ -66,7 +73,7 @@ def article_category(category, methods={'GET, POST'}):
         
     form = LoadMoreArticles()
     
-    if form.validate_on_submit():
+    if form.validte_on_submit():
         current_page = current_page + 1
         more_category_articles = Article.get_more_recent(current_page)
         
@@ -79,34 +86,40 @@ def article_category(category, methods={'GET, POST'}):
 @main.route('/articles/view/<int:article_id>')
 def view_articles(article_id):
     
-    article_data = Article.get_article(article_id)
+    article_data = Article.query.filter_by(id=article_id).first()
+    
+    related_articles = Article.query.filter_by(category = article_data.category).limit(5)
+    
+    if related_articles:
+        related_list = get_article_category_title(related_articles)
     
     title = f"Tony's Perspective: {article_data.title}"
     
     if article_data:
         category_data = Category.get_category(article_data.category)
-        article_data[category] = category_data.title
         
-    related_articles = Article.get_related_articles(category_data.id)
-    
-    if related_articles:
-        related_list = get_article_category_title(related_articles)
-        
+        article_item = dict()
+        category = Category.query.filter_by(id = article_data.category).first()
+        article_item['id'] = article_data.id 
+        article_item['image_url'] = article_data.image_url
+        article_item['title'] = article_data.title
+        article_item['date'] = article_data.date
+        article_item['content'] = article_data.content
+        article_item['views'] = article_data.views
+        article_item['comments'] = article_data.comments
+        article_item['category'] = category_data.title   
+            
+    form = AddComment()
     if current_user.is_authenticated:
-        form = AddComment()
-    
-        if form.validate_on_submit():
+        
+        if form.validte_on_submit():
             new_comment = form.comment_input.data
             
-            user_comment = Comment(user_id = current_user.id, article_id= article_id, content = new_comment)
+            user_comment = Comment(user_id = current_user.id, article_id = article_id, content = new_comment)
             
-            user_comment.add_comment()
-            
-    else:
-        form = None
-        
+            user_comment.add_comment()        
     
-    return render_template()
+    return render_template('pages/article.html', article = article_item, related = related_list, form = form, title = title)
         
 
 @login_required
@@ -115,13 +128,13 @@ def add_comment(article_id):
           
     form = AddComment()
     
-    if form.validate_on_submit():
+    if form.validate_on_submit() and current_user.is_authenticated:
         new_comment = form.comment_input.data
         
-        user_comment = Comment(user_id = current_user.id, article_id= article_id, content = new_comment)
+        user_comment = Comment(user_id = current_user.id, article_id = article_id, content = new_comment)
         
         user_comment.add_comment()
         
-        redirect(url_for('main.view_article', article_id = article_id))
-    
-    
+    else:
+        flash('Please login to post a comment')
+    return redirect(url_for('main.view_articles', article_id = article_id))
