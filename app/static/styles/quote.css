@@ -1,0 +1,52 @@
+.quote-otd-container {
+  display: flex;
+  flex-wrap: row wrap;
+  align-content: center;
+  justify-content: center;
+  margin: auto 50px;
+}
+.quote-otd-image-container {
+  width: 50%;
+}
+.quote-otd-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.quote-otd-text-container {
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+.quote-otd-text {
+  font-size: 16px;
+  /* font-weight: 700; */
+}
+.quote-otd-author {
+  font-size: 14px;
+  color: #22bfa5;
+  font-weight: 700;
+}
+.quote-otd-tag {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 576px) {
+  .quote-otd-image-container {
+    width: inherit;
+  }
+  .quote-otd-text-container {
+    width: inherit;
+  }
+
+  .quote-otd-container {
+    height: min-content;
+    flex-flow: column;
+    margin: 10px auto;
+  }
+}

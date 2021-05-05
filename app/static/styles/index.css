@@ -1,0 +1,29 @@
+.section-header {
+  font-size: 24px;
+  margin: 20px;
+  font-weight: 700;
+  color: #0b0a09;
+}
+
+.load-button-container {
+  width: 100;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.custom-button {
+  background-color: #22bfa5;
+  border: 1.5px solid #22bfa5;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.custom-button:hover {
+  background-color: #0b0a09;
+  border: 1.5px solid #0b0a09;
+  transition: 300ms ease-in;
+  color: #fff;
+}

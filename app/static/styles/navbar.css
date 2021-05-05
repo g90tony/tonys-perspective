@@ -1,4 +1,41 @@
 .custom-navbar {
   background-color: #0b0a09;
+}
+
+.custom-navbar a {
   color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.custom-navbar .navbar-brand {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.custom-navbar .nav-link {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.authentication-bar {
+  display: flex;
+  width: 100%;
+  background-color: #0b0a09;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  height: fit-content;
+  padding: auto 100px;
+  border: #0b0a09 solid 2px;
+}
+
+.authentication-link {
+  text-decoration: none;
+  color: #22bfa5;
+  font-size: 12px;
+  margin: auto 7px;
+  font-weight: 700;
+}
+.authentication-link:hover {
+  text-decoration: none;
+  color: #fff;
 }
