@@ -16,5 +16,13 @@
     <p class="related-article-date">{{item.date}}</p>
     <div class="related-article-category">{{item.category}}</div>
     <p class="related-article-body">{{item.content}}</p>
+    <a href="/articles/view/{{item.id}}" class="related-article-link"
+      >Read Article</a
+    >
   </div>
 </div>
+<!-- end of for block -->
+{% endfor %}
+
+<!-- end of macro -->
+{% endmacro %}
